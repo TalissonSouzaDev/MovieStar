@@ -1,0 +1,40 @@
+create database Moviestar;
+
+create table users(
+id int(11) UNSIGNED auto incrimente primary key,
+name varchar(100) not null,
+lastname varchar(100),
+password varchar(200) not null,
+image varchar(150),
+bio text,
+token varchar(200)
+);
+
+
+create table movies(
+
+id int(11) UNSIGNED primary key auto incrimente,
+title varchar(100) not null,
+description text not null,
+image varchar(150) not null,
+trailer varchar(100) not null,
+category varchar(50) not null,
+length varchar(50)
+
+user_id int(11) UNSIGNED,
+foreign key user_id references users(id);
+);
+
+
+CREATE TABLE REVIEW 
+
+(
+ID int(11) UNSIGNED AUTO INCREMENT PRIMARY KEY,
+rating int,
+review TEXT,
+user_id int(11) UNSIGNED,
+moview_id int(11) UNSIGNED,
+foreign key user_id references users(id);
+foreign key moview_id references movies(id);
+
+)
