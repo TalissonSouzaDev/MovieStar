@@ -1,10 +1,17 @@
 <?php
 require_once('./globais.php');
 require_once('./db.php');
-$flashmessage = [];
+require_once('./Models/Message.php');
 
-$flashmessage['msg'] =  "Ops ...";
-$flashmessage['type'] =  'alert-danger';
+$message = new Message('');
+$flashmessage = $message->GetMessage();
+
+if(!empty($flashmessage['msg']))
+{
+    $message->GetMessage();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +67,13 @@ $flashmessage['type'] =  'alert-danger';
 
     <div id="main-container" class="container-fluid">
 
-        <?php if (!isset($flashmessage['msg'])) : ?>
+        <?php if (!empty($flashmessage['msg'])) : ?>
 
 
             <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert">
+                    <?php echo @$flashmessage['msg']; ?>
+                </button>
              
             </div>
         <?php endif; ?>
