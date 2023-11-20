@@ -1,15 +1,25 @@
 <?php
+session_start();
 require_once('./globais.php');
 require_once('./db.php');
 require_once('./Models/Message.php');
+require_once('./dao/UserDAO.php');
 
-$message = new Message('');
+$message = new Message();
+//print_r($message->GetMessage());
 $flashmessage = $message->GetMessage();
 
-if(!empty($flashmessage['msg']))
-{
-    $message->GetMessage();
-}
+//print_r($flashmessage);
+
+//if(!empty($flashmessage['msg']))
+//{
+ //   $message->ClearMessage();
+//}
+
+$userdao =  new UserDAO($conn);
+$userdata = $userdao->verifyToken(false);
+
+
 
 
 ?>
@@ -54,9 +64,18 @@ if(!empty($flashmessage['msg']))
                     </form>
 
 
-                    <ul class="navbar-nav d-flex me-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="auth.php">Entrar | Registrar</a>
+                    <ul class="navbar-nav d-flex">
+                    <?php if($userdata): ?>
+                        <li class="nav-item"><a href="newmovie.php" class="nav-link"><i class="far fa-plus-square"></i> Incluir Filmes</a></li>
+                        <li class="nav-item"><a href="dashboard.php" class="nav-link">Meus Filmes</a></li>
+                        <li class="nav-item"><a href="editprofile.php" class="nav-link bold"><?php $userdata->name; ?></a></li>
+                        <li class="nav-item"><a href="logout.php" class="nav-link">Sair</a></li>
+                       
+                         
+                                <?php echo $userdata->name; ?>
+                            <?php else: ?>
+                                <a class="nav-link" href="auth.php">Entrar | Registrar</a>
+                            <?php endif; ?>
                         </li>
                     </ul>
                 </div>
@@ -72,8 +91,11 @@ if(!empty($flashmessage['msg']))
 
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="btn-close" data-bs-dismiss="alert">
-                    <?php echo @$flashmessage['msg']; ?>
                 </button>
+
+                <span class="text-dark">
+                <?php echo @$flashmessage['msg']; ?>
+                </span>
              
             </div>
         <?php endif; ?>

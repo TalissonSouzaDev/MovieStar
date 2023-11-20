@@ -14,11 +14,28 @@ class User {
     public $bio;
     public $token;
 
+ // gerador de token
+    public function generateToken()
+    {
+        return bin2hex(random_bytes(50));
+
+    }
+
+
+    // gerador de senha
+    public function generatePassword(string $password)
+    {
+        return password_hash($password,PASSWORD_DEFAULT);
+
+    }
+
 }
 
+
+
 interface UserDaoInterface {
-    public function buildUser($data): array;
-    public function create(User $user, $authUser = false);
+    public function buildUser($data);
+    public function create(User $user);
     public function update(User $user);
     public function verifyToken($protected = false);
     public function setTokenToSession($oken, $redirect = true);
@@ -27,4 +44,5 @@ interface UserDaoInterface {
     public function findById($id);
     public function findByToken($token);
     public function changePassword(User $user);
+    public function destroytoken();
 }

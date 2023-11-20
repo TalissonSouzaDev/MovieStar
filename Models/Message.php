@@ -1,57 +1,46 @@
 <?php
-
 class Message {
-    private $url;
 
     protected $msg,$type;
 
-    public function __construct($url)
-    {
-        $this->url = $url;
-    }
-
-
     public function SetMessage($msg, $type, $redirect = "index.php")
     {
-        $this->msg =  'msg';
-        $this->type ='type';
 
-        
+      // return print_r($_SESSION['msg']);
 
         if($redirect != "back")
         {
-            header("Location: $this->url".$redirect);
+            $_SESSION['msg'] =  $msg;
+            $_SESSION['type'] = $type;
+            header("Location:".$redirect);
         }
         else {
             header("Location:". $_SERVER['HTTP_REFERER']);
         }
     }
-    public function GetMessage()
+    public function GetMessage(): array
     {
-
-
-        if(!empty($_SESSION['msg'])){
-
-            $_SESSION['msg'] = $this->msg;
-            $_SESSION['type'] = $this->type;
-
-            return [
+        $message = [];
+           
+        if(isset($_SESSION['msg']) && isset($_SESSION['type']))
+        {
+            $message = [
                 "msg" => $_SESSION['msg'],
                 "type" => $_SESSION['type']
-
             ];
-        }
 
-        else{
-            return false;
+            return $message;
         }
+  
+
+            return $message;
+     
     }
     public function ClearMessage()
     {
         $_SESSION['msg'] =  '';
         $_SESSION['type'] = '';
 
-        session_destroy();
 
     }
 }

@@ -43,7 +43,7 @@
    <br>
 
    <div class="form-group">
-    <button type="submit" class="btn btn-warning btn-lg">Entrar</button>
+    <button type="submit" class="btn btn-warning btn-lg">Cadastrar</button>
    </div>
    
    
@@ -62,12 +62,12 @@
 
    <div class="form-group">
     <label for="">Login:</label>
-    <input type="email" class="form-control" name="Email" placeholder="Digite seu email" autocomplete="off">
+    <input type="email" class="form-control" name="email" placeholder="Digite seu email" autocomplete="off">
    </div>
 
    <div class="form-group">
     <label for="">Senha:</label>
-    <input type="text" class="form-control" name="password" placeholder="senha" autocomplete="off">
+    <input type="password" class="form-control" name="password" placeholder="senha" autocomplete="off">
    </div>
    <br>
 

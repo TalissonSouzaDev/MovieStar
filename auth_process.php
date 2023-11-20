@@ -5,8 +5,9 @@ require_once("Models/Message.php");
 require_once("dao/UserDAO.php");
 
 
-$UserDao = new UserDao($conn,"header");
-$Message = new Message("");
+
+$Message = new Message();
+$UserDao = new UserDao($conn);
 
 
  // verifica o formulario
@@ -21,22 +22,57 @@ $Message = new Message("");
     $password = filter_input(INPUT_POST, "password");
     $confirm_password = filter_input(INPUT_POST, "confirm_password");
 
-    if($password == $confirm_password)
+    // verificar se os dados estão em branco
+    if(!empty($name) && !empty($lastname) && !empty($email))
     {
-        $data = [ 
-            "name" => $name,
-            "lastname" => $lastname,
-            "email" => $email,
-            "password" => $password,
+ // verificar se as senha são iguais
+    if($password == $confirm_password)
+      {
+        if($UserDao->findByEmail($email) == false)
+         {
 
-        ];
+      try {
+        $user= new User();
+        $user->name = $name;
+        $user->lastname = $lastname;
+        $user->email = $email;
+        $user->password = $user->generatePassword($password);
+        $user->token = $user->generateToken();
+
+        $auth = true;
+
+        $registertrue = $UserDao->create($user);
+
+        if($registertrue)
+        {
+            return $UserDao->SetTokenToSession($user->token);
+        }
+
+        //return print_r($registertrue);
+      }
+
+      catch (Exception $e)
+       {
+         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+       }
+
+    
+      
+     }
+     else
+     {
+        // message
+        echo "cadastro ativo";
+     }
+
+    }
 
         //$datauser = $UserDao->buildUser($data);
-
-        print_r($data);
     }
 
     else {
+
+        //print_r("aqui");
         $Message->SetMessage("As senha não são iguais","alert-warning","auth.php");
 
      }
@@ -46,7 +82,17 @@ $Message = new Message("");
 
     $email = filter_input(INPUT_POST, "email");
     $password = filter_input(INPUT_POST, "password");
-    print_r($type);
+    
+    if(!empty($email) && !empty($password))
+    { 
+        $UserDao->authenticateUser($email,$password);
+          
+    }
+
+    else 
+    {
+        print_r("error"); exit;
+    }
  }
 
  else{
