@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once('./globais.php');
 require_once('./db.php');
@@ -68,7 +69,7 @@ $userdata = $userdao->verifyToken(false);
                     <?php if($userdata): ?>
                         <li class="nav-item"><a href="newmovie.php" class="nav-link"><i class="far fa-plus-square"></i> Incluir Filmes</a></li>
                         <li class="nav-item"><a href="dashboard.php" class="nav-link">Meus Filmes</a></li>
-                        <li class="nav-item"><a href="editprofile.php" class="nav-link bold"><?php $userdata->name; ?></a></li>
+                        <li class="nav-item"><a href="editprofile.php" class="nav-link bold"><?php echo strtoupper($userdata->name); ?></a></li>
                         <li class="nav-item"><a href="logout.php" class="nav-link">Sair</a></li>
                        
                          
@@ -89,7 +90,7 @@ $userdata = $userdao->verifyToken(false);
         <?php if (!empty($flashmessage['msg'])) : ?>
 
 
-            <div class="alert alert-danger alert-dismissible">
+            <div class="alert <?php echo $flashmessage['type'];  ?> alert-dismissible">
                 <button type="button" class="btn-close" data-bs-dismiss="alert">
                 </button>
 

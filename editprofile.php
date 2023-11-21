@@ -13,7 +13,7 @@
  ?>
 
    
-    <h1>Perfil <?php echo @$_SESSION['token']; ?></h1>
+    <h1>Perfil <?php echo @$_SESSION['type']; ?></h1>
    
 
  <?php

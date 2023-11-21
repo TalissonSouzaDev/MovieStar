@@ -1,4 +1,6 @@
 <?php
+ob_start();
+@session_start();
 require_once("models/User.php");
 require_once("Models/Message.php");
 
@@ -85,7 +87,7 @@ class UserDao implements UserDaoInterface
 
         if($redirect)
         {
-          $this->message->setMessage("Seja bem vindo", "success", "editprofile.php");
+          $this->message->setMessage("Seja bem vindo", "alert-success", "editprofile.php");
         }
     }
 
@@ -227,7 +229,10 @@ class UserDao implements UserDaoInterface
 
     public function destroytoken()
     {
+     
        session_destroy();
+       header("Location:index.php");
+       
     }
 
 }
