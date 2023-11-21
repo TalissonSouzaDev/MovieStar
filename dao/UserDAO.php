@@ -23,6 +23,7 @@ class UserDao implements UserDaoInterface
         $user->id = $data['id'];
         $user->name = $data['name'];
         $user->lastname = $data['lastname'];
+        $user->email = $data['email'];
         $user->password = $data['password'];
         $user->image = $data['image'];
         $user->bio = $data['bio'];
@@ -115,13 +116,13 @@ class UserDao implements UserDaoInterface
                 else
                 {
                     // senha não conferir
-                    echo "error de senha"; exit;
+                    $this->message->SetMessage("senha incorreta","alert-info","auth.php");
                 }
 
             }
             else
             {
-                echo "email com error";
+              $this->message->SetMessage("email não cadastrado","alert-info","auth.php");
             }
            
            

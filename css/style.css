@@ -81,3 +81,9 @@
     width: 500px;
     color: #FFF;
 }
+
+.editprofile div input,textarea{
+    max-width: 50%;
+    padding: 15px;
+    margin-bottom: 5px;
+}

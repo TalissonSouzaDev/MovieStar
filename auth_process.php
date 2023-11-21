@@ -91,7 +91,7 @@ $UserDao = new UserDao($conn);
 
     else 
     {
-        print_r("error"); exit;
+      $Message->SetMessage("Login ou senha incorreto","alert-danger","auth.php");
     }
  }
 

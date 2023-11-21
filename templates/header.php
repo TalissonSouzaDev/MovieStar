@@ -7,15 +7,12 @@ require_once('./Models/Message.php');
 require_once('./dao/UserDAO.php');
 
 $message = new Message();
-//print_r($message->GetMessage());
 $flashmessage = $message->GetMessage();
 
-//print_r($flashmessage);
-
-//if(!empty($flashmessage['msg']))
-//{
- //   $message->ClearMessage();
-//}
+if(!empty($flashmessage['msg']))
+{
+    $message->ClearMessage();
+}
 
 $userdao =  new UserDAO($conn);
 $userdata = $userdao->verifyToken(false);
