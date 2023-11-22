@@ -56,7 +56,41 @@ class UserDao implements UserDaoInterface
 
 
     }
-    public function update(User $user){}
+    public function update(User $user)
+    {
+   
+      try {
+    
+        $stmt = $this->conn->prepare(
+          "UPDATE users SET
+            name = :name,
+            lastname = :lastname,
+            email = :email,
+            bio = :bio
+            image = :image
+            token = :token
+            WHERE id = :id 
+           ");
+          // print_r($user);exit;
+           $stmt->bindParam(":name",$user->name);
+           $stmt->bindParam(":lastname",$user->lastname);
+           $stmt->bindParam(":email",$user->email);
+           $stmt->bindParam(":image",$user->image);
+           $stmt->bindParam(":bio",$user->bio);
+           $stmt->bindParam(":token",$user->token);
+           $stmt->bindParam(":id",$user->id);
+           
+           $stmt->execute();
+
+           print_r("update ok");exit;
+
+           return true;
+      }
+      catch (Exception $e) {
+        print_r("update erro");exit;
+        return false;
+      }
+    }
     public function verifyToken($protected = false)
     {
         if(!empty($_SESSION['token']))

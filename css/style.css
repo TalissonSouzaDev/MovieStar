@@ -81,9 +81,28 @@
     width: 500px;
     color: #FFF;
 }
+.editprofile{
+ display: flex;
+ flex-direction: column;
+align-items: center;
+}
 
+.editprofile h1{
+ padding: 25px;
+}
 .editprofile div input,textarea{
-    max-width: 50%;
-    padding: 15px;
+    width: 500px;
+    padding: 5px;
     margin-bottom: 5px;
+}
+
+.file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.file img{
+    background-size: cover;
+    width: 300px;
+    border-radius: 25px;
 }

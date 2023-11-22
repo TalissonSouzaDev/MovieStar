@@ -14,6 +14,13 @@ class User {
     public $bio;
     public $token;
 
+    //fullname
+
+    public function fullname($user)
+    {
+        return $user->name." ". $user->lastname;
+    }
+
  // gerador de token
     public function generateToken()
     {
