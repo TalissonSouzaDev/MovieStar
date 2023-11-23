@@ -14,7 +14,7 @@
  $fullname = $user->fullname($userdata);
 
  if($userdata->image == ""){
-   $userdata->image = "img\user\user_cover.png";
+   $userdata->image = "user_cover.png";
  }
 
  ?>
@@ -30,11 +30,10 @@
 
    <div class="form-group file">
   
-   <img src="<?php echo $userdata->image; ?>"  alt="imageuser" srcset=""/>
+   <img src="img\user\<?php echo $userdata->image; ?>"  alt="imageuser" srcset=""/>
  
    <input type="file" name="image" id="" class="form-control-file">
 
-      
    </div>
 
   <div class="form-group">
@@ -82,7 +81,7 @@
 
    <div class="form-group">
    <label for="newconfimpassword">Confirma Senha:</label>
-      <input type="email" class="form-control disabled" name="newconfimpassword">
+      <input type="password" class="form-control" name="newconfimpassword">
    </div>
 
 <br>

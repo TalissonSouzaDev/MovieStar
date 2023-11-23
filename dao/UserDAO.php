@@ -59,38 +59,38 @@ class UserDao implements UserDaoInterface
     public function update(User $user)
     {
    
-      try {
     
-        $stmt = $this->conn->prepare(
-          "UPDATE users SET
-            name = :name,
-            lastname = :lastname,
-            email = :email,
-            bio = :bio
-            image = :image
-            token = :token
-            WHERE id = :id 
-           ");
-          // print_r($user);exit;
-           $stmt->bindParam(":name",$user->name);
-           $stmt->bindParam(":lastname",$user->lastname);
-           $stmt->bindParam(":email",$user->email);
-           $stmt->bindParam(":image",$user->image);
-           $stmt->bindParam(":bio",$user->bio);
-           $stmt->bindParam(":token",$user->token);
-           $stmt->bindParam(":id",$user->id);
-           
-           $stmt->execute();
 
-           print_r("update ok");exit;
+        
+      //print_r($user->id);exit;
+    try
+    {
+      $sql =  "UPDATE users SET name=:name, lastname=:lastname, email=:email, bio=:bio, image=:image, token=:token WHERE id=:id";
+    
+      $stmt = $this->conn->prepare($sql);
+  
+         $stmt->bindParam(":name",$user->name);
+         $stmt->bindParam(":lastname",$user->lastname);
+         $stmt->bindParam(":email",$user->email);
+         $stmt->bindParam(":image",$user->image);
+         $stmt->bindParam(":bio",$user->bio);
+         $stmt->bindParam(":token",$user->token);
+         $stmt->bindParam(":id",$user->id);
+         $stmt->execute();
 
-           return true;
-      }
-      catch (Exception $e) {
-        print_r("update erro");exit;
-        return false;
-      }
+         return true;
     }
+
+    catch (Exception $e) {
+      return false;
+    }
+
+
+     
+    }
+
+
+
     public function verifyToken($protected = false)
     {
         if(!empty($_SESSION['token']))
@@ -260,7 +260,29 @@ class UserDao implements UserDaoInterface
 }
 
 
-    public function changePassword(User $user){}
+    public function changePassword(User $user)
+    {
+     
+    try
+    {
+      $sql = "UPDATE users SET password=:password WHERE id =:id";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->bindParam(":password",$user->password);
+      $stmt->bindParam(":id",$user->id);
+      $stmt->execute();
+
+      return true;
+    }
+
+    
+    catch (Exception $e) {
+      return false;
+    }
+   
+
+
+      
+    }
 
     public function destroytoken()
     {
@@ -268,6 +290,54 @@ class UserDao implements UserDaoInterface
        session_destroy();
        header("Location:index.php");
        
+    }
+
+
+    public function Image($imagePost)
+    {
+      if(!empty($imagePost['tmp_name']))
+      {
+
+       $image = $imagePost;
+       $imagetype= ["image/jpeg","image/jpg","image/png"];
+       $jpgarray =   ["image/jpeg","image/jpg"];
+  
+       // checagem de tipo de image
+       if(in_array($image['type'],$imagetype))
+       {
+        if(in_array($image['type'],$jpgarray))
+        {
+           // imagem é png
+           $imagefile = imagecreatefromjpeg($image['tmp_name']);
+        }
+  
+        else
+        {
+           $imagefile = imagecreatefrompng($image['tmp_name']);
+        }
+
+        $user = new User();
+  
+        $imageName = $user->generateimage();
+  
+        imagejpeg($imagefile,"./img/user/". $imageName, 100);
+
+  
+       return $imageName;
+  
+       }
+       else
+       {
+
+        print_r('wrror');exit;
+        $this->message->SetMessage("tipo invalido insira png,jpeg ou jpg","alert-danger","editprofile.php");
+       }
+      }
+
+      else
+      {
+        print_r('wrror 01');exit;
+      }
     }
 
 }

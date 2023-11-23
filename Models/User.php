@@ -36,6 +36,12 @@ class User {
 
     }
 
+    public function generateimage()
+    {
+        return bin2hex(random_bytes(60)) . ".jpg";
+
+    }
+
 }
 
 
@@ -52,4 +58,5 @@ interface UserDaoInterface {
     public function findByToken($token);
     public function changePassword(User $user);
     public function destroytoken();
+    public function Image($imagePost);
 }
