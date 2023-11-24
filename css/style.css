@@ -103,6 +103,39 @@ align-items: center;
 }
 .file img{
     background-size: cover;
-    width: 300px;
-    border-radius: 25px;
+    object-fit: cover;
+    width: 250px;
+    border-radius: 100%;
+}
+
+.newmovie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+.newmovie h4 {
+    color: wheat;
+}
+
+.newmovie form button {
+    margin-top: 5px;
+    width: 100%;
+}
+.myfiles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+}
+.card-myfiles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 50px;
+
+}
+.card-myfiles div {
+    margin: 10px;
 }

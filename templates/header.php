@@ -65,7 +65,7 @@ $userdata = $userdao->verifyToken(false);
                     <ul class="navbar-nav d-flex">
                     <?php if($userdata): ?>
                         <li class="nav-item"><a href="newmovie.php" class="nav-link"><i class="far fa-plus-square"></i> Incluir Filmes</a></li>
-                        <li class="nav-item"><a href="dashboard.php" class="nav-link">Meus Filmes</a></li>
+                        <li class="nav-item"><a href="myfiles.php" class="nav-link">Meus Filmes</a></li>
                         <li class="nav-item"><a href="editprofile.php" class="nav-link bold"><?php echo strtoupper($userdata->name); ?></a></li>
                         <li class="nav-item"><a href="logout.php" class="nav-link">Sair</a></li>
                        

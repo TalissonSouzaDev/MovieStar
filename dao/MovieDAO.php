@@ -38,7 +38,22 @@ class MovieDao implements IMovie
     public function getMoviesByCategory($category){}
     public function findById($id){}
     public function findByTitle($title){}
-    public function Create(Movie $movie){}
+    public function Create(Movie $movie)
+    {
+      $sql = "INSERT INTO movies (title,description,image,trailer,category,length,user_id) VALUES (:title,:description,:image,:trailer,:category,:length,:user_id)";
+      $stmt = $this->conn->prepare($sql);
+      //  d***************************
+      $stmt->bindParam(":title",$movie->title);
+      $stmt->bindParam(":description",$movie->description);
+      $stmt->bindParam(":image",$movie->image);
+      $stmt->bindParam(":trailer",$movie->trailer);
+      $stmt->bindParam(":category",$movie->category);
+      $stmt->bindParam(":length",$movie->length);
+      $stmt->bindParam(":user_id",$movie->user_id);
+      $stmt->execute();
+
+      return true;
+    }
     public function update(Movie $movie){}
     public function destroy($id){}
 
@@ -69,7 +84,7 @@ class MovieDao implements IMovie
   
         $imageName = $movie->generateimage();
   
-        imagejpeg($imagefile,"./img/movie/". $imageName, 100);
+        imagejpeg($imagefile,"./img/movies/". $imageName, 100);
 
   
        return $imageName;

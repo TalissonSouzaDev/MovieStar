@@ -2,6 +2,8 @@
 <?php
  require_once("./templates/header.php");
 
+
+ 
  if($userdata != [])
 {
     $userdao->verifyToken(false);
@@ -10,9 +12,9 @@
  else{
     $userdao->verifyToken(true);
  }
-
+ 
  ?>
-<div>
+<div class="newmovie">
     <h1>Adicionar Filme</h1>
     <h4>Mostre o melhor do cinema para o mundo!</h4>
  <form action="movie_process.php" method="post" enctype="multipart/form-data">
@@ -63,7 +65,7 @@
 
  </div>
 
-<input type="submit" value="Adicionar Filme" class="btn btn-warning btn-lg">
+<button type="submit" class="btn btn-warning btn-lg"> Adicionar Filme</button>
  </form>
 </div>
 

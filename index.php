@@ -2,8 +2,6 @@
 <?php
  require_once("./templates/header.php");
 
- $_SESSION['teste'] =  "ola muindo";
- $test = 'teste';
  ?>
 
    

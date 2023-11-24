@@ -4,11 +4,19 @@ require_once("db.php");
 require_once("Models/Movie.php");
 require_once("Models/Message.php");
 require_once("dao/MovieDAO.php");
+require_once("dao/UserDAO.php");
 
 
 
 $Message = new Message();
-$UserDao = new MovieDao($conn);
+$MovieDao = new MovieDao($conn);
+
+// usuario autenticado
+$UserDao = new UserDao($conn);
+$user = $UserDao->verifyToken(false);
+
+
+
 
 $type = filter_input(INPUT_POST, "type");
 
@@ -23,15 +31,16 @@ if($type == "create")
 
     $movie = new Movie();
 
-    if(!empty($title) && !empty($title) && !empty($title) )
+    if(!empty($title) && !empty($description) && !empty($length) )
     {
 
-        print_r($_POST);print_r($_FILES);exit;
+       
         $movie->title = $title;
         $movie->length = $length;
         $movie->description = $description;
         $movie->trailer = $trailer;
         $movie->category = $category;
+        $movie->user_id = $user->id;
         if(isset($_FILES['image']))
         {
 
@@ -40,7 +49,7 @@ if($type == "create")
 
         }
 
-        $createmovie = $MovieDao->create($movie);
+        $createmovie = $MovieDao->Create($movie);
         if($createmovie)
         {
             $Message->SetMessage("Filme Adicionado com sucesso","alert-success","newmovie.php");

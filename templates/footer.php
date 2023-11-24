@@ -16,9 +16,11 @@
 
     <div id="footer-links-container">
         <ul>
-            <li><a href="">Adiconar Filme</a></li>
-            <li><a href="">Adiconar Criticas</a></li>
-            <li><a href="">Entrar / Registrar</a></li>
+            <li><a href="">Adicionar Filme</a></li>
+            <li><a href="">Adicionar Criticas</a></li>
+            <?php if(empty($userdata)): ?>
+                <li><a href="">Entrar / Registrar</a></li>
+            <?php endif;?>
         </ul>
     </div>
     <p>&copy; 2023 Talisson Souza</p>
