@@ -30,6 +30,7 @@ interface IMovie
     public function findAll();
     public function getLatestMovie();
     public function getMoviesByCategory($category);
+    public function myfiles();
     public function findById($id);
     public function findByTitle($title);
     public function Create(Movie $movie);

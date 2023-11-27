@@ -1,3 +1,14 @@
+*{
+    box-sizing: border-box;
+    background-color: #000;
+}
+body {
+    margin: 0%;
+    padding: 0%;
+    
+
+}
+
 .navbar-container {
     display: flex;
     flex-direction: row;
@@ -5,17 +16,19 @@
 }
 
 #main-container {
+    margin: 0px;
     background-color: #000;
     color: #fff;
-     width: 100%;
-     min-height: 75vh;
+    width: 100%;
+
+    
 }
 
 #footer {
+    margin: 0px;
     background-color: #000;
     text-align: center;
     color: #FFF;
-    margin: 0;
     padding: 20px;
 }
 
@@ -139,3 +152,35 @@ align-items: center;
 .card-myfiles div {
     margin: 10px;
 }
+
+/* index home*/
+
+.index_list ul {
+    list-style: none;
+   padding: 100px;
+}
+.index_list ul li h1 {
+   
+    border-bottom: 2px solid white;
+    width:25%;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+.movie_card
+{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.latestmovie{
+    display: flex;
+    flex-direction: column;
+}
+.latestmovie a {
+    text-decoration: none;
+    margin-bottom: 15px;
+    
+}
+

@@ -32,7 +32,8 @@ $userdata = $userdao->verifyToken(false);
 
     <!-- CSS PROJETO -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.css" integrity="sha512-r0fo0kMK8myZfuKWk9b6yY8azUnHCPhgNz/uWDl2rtMdWJlk7gmd9socvGZdZzICwAkMgfTkVrplDahQ07Gi0A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.css" integrity="sha512-r0fo0kMK8myZfuKWk9b6yY8azUnHCPhgNz/uWDl2rtMdWJlk7gmd9socvGZdZzICwAkMgfTkVrplDahQ07Gi0A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!--  Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -49,7 +50,7 @@ $userdata = $userdao->verifyToken(false);
 
 
             <div class="container-fluid">
-                <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+                <a class="navbar-brand" href="index.php">Logo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -66,11 +67,11 @@ $userdata = $userdao->verifyToken(false);
                     <?php if($userdata): ?>
                         <li class="nav-item"><a href="newmovie.php" class="nav-link"><i class="far fa-plus-square"></i> Incluir Filmes</a></li>
                         <li class="nav-item"><a href="myfiles.php" class="nav-link">Meus Filmes</a></li>
-                        <li class="nav-item"><a href="editprofile.php" class="nav-link bold"><?php echo strtoupper($userdata->name); ?></a></li>
+                        <li class="nav-item"><a href="editprofile.php" class="nav-link bold"><?= strtoupper($userdata->name); ?></a></li>
                         <li class="nav-item"><a href="logout.php" class="nav-link">Sair</a></li>
                        
                          
-                                <?php echo $userdata->name; ?>
+            
                             <?php else: ?>
                                 <a class="nav-link" href="auth.php">Entrar | Registrar</a>
                             <?php endif; ?>

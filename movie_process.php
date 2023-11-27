@@ -52,7 +52,7 @@ if($type == "create")
         $createmovie = $MovieDao->Create($movie);
         if($createmovie)
         {
-            $Message->SetMessage("Filme Adicionado com sucesso","alert-success","newmovie.php");
+            $Message->SetMessage("Filme Adicionado com sucesso","alert-success","myfiles.php");
         }
     }
     else

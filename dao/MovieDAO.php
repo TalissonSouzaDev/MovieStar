@@ -3,7 +3,9 @@
 ob_start();
 @session_start();
 require_once("models/Movie.php");
+require_once("./dao/UserDAO.php");
 require_once("Models/Message.php");
+
 
 
 class MovieDao implements IMovie
@@ -34,8 +36,65 @@ class MovieDao implements IMovie
 
 
     public function findAll(){}
-    public function getLatestMovie(){}
-    public function getMoviesByCategory($category){}
+
+    public function myfiles()
+    {
+
+      $userdao = new UserDao($this->conn);
+      $user = $userdao->verifyToken(false);
+
+      $movies= [];
+
+      $stmt = $this->conn->prepare("SELECT * FROM movies WHERE user_id = :user_id ORDER BY id DESC");
+      $stmt->bindParam(":user_id",$user->id);
+      $stmt->execute();
+      if($stmt->rowCount() > 0)
+      {
+        $moviearray = $stmt->fetchAll();
+        foreach($moviearray as $movie)
+        {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
+
+    }
+    public function getLatestMovie()
+    {
+      $movies= [];
+      $stmt = $this->conn->query("SELECT * FROM movies ORDER BY id DESC");
+      $stmt->execute();
+
+      if($stmt->rowCount() > 0)
+      {
+        $moviearray = $stmt->fetchAll();
+        foreach($moviearray as $movie)
+        {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+      return $movies;
+    }
+    public function getMoviesByCategory($category)
+    {
+  
+      $movies= [];
+
+      $stmt = $this->conn->prepare("SELECT * FROM movies WHERE category = :category LIMIT 4");
+      $stmt->bindParam(":category",$category);
+      $stmt->execute();
+      if($stmt->rowCount() > 0)
+      {
+        $moviearray = $stmt->fetchAll();
+        foreach($moviearray as $movie)
+        {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
+    }
     public function findById($id){}
     public function findByTitle($title){}
     public function Create(Movie $movie)
