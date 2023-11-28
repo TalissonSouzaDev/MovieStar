@@ -25,7 +25,7 @@ class MovieDao implements IMovie
         $movie->id = $data['id'];
         $movie->title = $data['title'];
         $movie->image = $data['image'];
-        $movie->length = $data['id'];
+        $movie->length = $data['length'];
         $movie->category = $data['category'];
         $movie->trailer = $data['trailer'];
         $movie->description = $data['description'];
@@ -95,7 +95,20 @@ class MovieDao implements IMovie
 
       return $movies;
     }
-    public function findById($id){}
+    public function findById($id)
+    {
+      $stmt = $this->conn->prepare("SELECT * FROM movies WHERE id = :id");
+      $stmt->bindParam(":id",$id);
+      $stmt->execute();
+
+      if($stmt->rowCount() > 0)
+      {
+        $moviedata = $stmt->fetch();
+        $movie = $this->buildMovie($moviedata);
+
+        return $movie;
+      }
+    }
     public function findByTitle($title){}
     public function Create(Movie $movie)
     {
@@ -113,8 +126,46 @@ class MovieDao implements IMovie
 
       return true;
     }
-    public function update(Movie $movie){}
-    public function destroy($id){}
+    public function update(Movie $movie)
+    {
+
+      $sql = "UPDATE movies SET title= :title,length= :length , trailer= :trailer, category= :category,description= :description,image= :image,user_id= :user_id WHERE id= :id ";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->bindParam(":id",$movie->id);
+      $stmt->bindParam(":title",$movie->title);
+      $stmt->bindParam(":length",$movie->length);
+      $stmt->bindParam(":trailer",$movie->trailer);
+      $stmt->bindParam(":category",$movie->category);
+      $stmt->bindParam(":description",$movie->description);
+      $stmt->bindParam(":image",$movie->image);
+      $stmt->bindParam(":user_id",$movie->user_id);
+      $stmt->execute();
+
+
+      if($stmt->rowCount() > 0)
+      {
+        return true;
+      }
+
+      else {
+        return false;
+      }
+    }
+    public function destroy($id)
+    {
+      try {
+        $moviedata = $this->findById($id);
+      $stmt = $this->conn->prepare("DELETE FROM movies WHERE id = :id ");
+      $stmt->bindParam(":id",$moviedata->id);
+      $stmt->execute();
+      return true;
+      }
+
+      catch (Exception $e)
+      {
+        return false;
+      }
+    }
 
     public function ImageMovie($imagePost)
     {
@@ -151,15 +202,13 @@ class MovieDao implements IMovie
        }
        else
        {
-
-        print_r('wrror');exit;
-        $this->message->SetMessage("tipo invalido insira png,jpeg ou jpg","alert-danger","editprofile.php");
+        $this->message->SetMessage("tipo invalido insira png,jpeg ou jpg","alert-danger","index.php");
        }
       }
 
       else
       {
-        print_r('wrror 01');exit;
+        $this->message->SetMessage("Error","alert-danger","index.php");
       }
     
 

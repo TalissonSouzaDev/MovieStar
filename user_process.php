@@ -31,7 +31,7 @@ $user = new User();
     $userdata->bio = $_POST['bio'];
 
     // image
- if(isset($_FILES['image']))
+ if(isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']))
  {
    $imageName = $UserDao->Image($_FILES['image']);  
    $userdata->image = $imageName;

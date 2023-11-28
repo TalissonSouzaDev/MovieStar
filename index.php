@@ -49,9 +49,11 @@
          if(count($actionMovie) > 0)
          {
            
+            echo "<div class='movie_card'>";
             foreach($actionMovie as $movie): 
                include("./templates/movie_card.php");
             endforeach;
+            echo "</div>";
          }
          else
          {
@@ -68,10 +70,11 @@
          <?php 
          if(count($comedyMovie) > 0)
          {
-         
+            echo "<div class='movie_card'>";
             foreach($comedyMovie as $movie): 
                include("./templates/movie_card.php");
             endforeach;
+            echo "</div>";
          }
          else
          {
@@ -89,10 +92,11 @@
          <?php 
          if(count($DramaMovie) > 0)
          {
-            echo "<span>Veja as criticas dos ultimos filmes adicionado</span>";
+            echo "<div class='movie_card'>";
             foreach($DramaMovie as $movie): 
                include("./templates/movie_card.php");
             endforeach;
+            echo "</div>";
          }
          else
          {

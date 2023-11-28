@@ -35,10 +35,16 @@
   <span class="rating">9</span>
   </div>
     <div class="latestmovie">
-    <a href="movie.php?=<?= $movie->id ?>" class="card-title"><?= $movie->title ?></a>
+    <a href="movie.php?id=<?= $movie->id ?>" class="card-title"><?= $movie->title ?></a>
     <p class="card-text"><?= $movie->description ?></p>
-    <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>
-    <a href="#" class="btn btn-danger"><i class="fas fa-times"></i> Excluir</a>
+    <a href="editmovie.php?id=<?= $movie->id ?>" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>
+
+    <form action="movie_process.php" method="post">
+      <input type="hidden" name="type" value="delete">
+      <input type="hidden" name="id" value="<?= $movie->id ?>">
+      <button type="submit" class="btn btn-danger" style="width: 100%;"><i class="fas fa-times"></i> Excluir</button>
+    </form>
+
     </div>
   
   </div>

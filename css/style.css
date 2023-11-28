@@ -1,6 +1,5 @@
 *{
     box-sizing: border-box;
-    background-color: #000;
 }
 body {
     margin: 0%;
@@ -9,11 +8,49 @@ body {
 
 }
 
-.navbar-container {
+
+#nav-container{
+    height: 100px;
+    box-shadow: 5px 3px 10px gray;
+    padding: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
+
+    
 }
+
+.nav-elements {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.nav-elements form input
+{
+    width: 600px;
+    outline: none;
+    height: 50px;
+    border: none;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.nav-elements form button
+{
+
+    outline: none;
+    height: 50px;
+    border: none;
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+.nav-elements form button:hover {
+    background-color: #f8f6f6;
+}
+
 
 #main-container {
     margin: 0px;
@@ -182,5 +219,22 @@ align-items: center;
     text-decoration: none;
     margin-bottom: 15px;
     
+}
+
+.moviereview 
+{
+    padding-top: 50px;
+}
+#reviews-container
+{
+   background-color: #ffffff3a;
+   padding: 50px;
+   margin-top: 25px;
+   border-radius: 5px;
+   
+
+}
+.review div div img {
+    border-radius: 50px;
 }
 

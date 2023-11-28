@@ -34,7 +34,8 @@ $userdata = $userdao->verifyToken(false);
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.css" integrity="sha512-r0fo0kMK8myZfuKWk9b6yY8azUnHCPhgNz/uWDl2rtMdWJlk7gmd9socvGZdZzICwAkMgfTkVrplDahQ07Gi0A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!--  Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Javascript  -->
@@ -44,22 +45,19 @@ $userdata = $userdao->verifyToken(false);
 
 <body>
     <header class="">
-        <nav class="navbar navbar-container navbar-expand navbar-dark bg-dark">
 
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid " id="nav-container">
+    <a class="navbar-brand" href="index.php"><i class="fas fa-star"></i> PipeStar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-elements" id="mynavbar">
+  
 
-
-
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">Logo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mynavbar">
-
-
-                    <form class="d-flex">
-                        <input class="form-control" type="text" placeholder="Search">
-                        <button class="btn btn-primary" type="button">Search</button>
+                <form class="d-flex" method="post">
+                        <input class="form-control" name="search" type="text" placeholder="Search">
+                        <button class="btn btn-light" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
 
 
@@ -78,8 +76,11 @@ $userdata = $userdao->verifyToken(false);
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
+      </ul>
+
+    </div>
+  </div>
+</nav>
 
     </header>
 
