@@ -76,6 +76,33 @@ class MovieDao implements IMovie
       }
       return $movies;
     }
+
+
+
+
+    public function getMoviesByUserId($id)
+    {
+
+      $userdao = new UserDao($this->conn);
+      $user = $userdao->verifyToken(false);
+
+      $movies= [];
+
+      $stmt = $this->conn->prepare("SELECT * FROM movies WHERE user_id = :user_id ORDER BY id DESC");
+      $stmt->bindParam(":user_id",$id);
+      $stmt->execute();
+      if($stmt->rowCount() > 0)
+      {
+        $moviearray = $stmt->fetchAll();
+        foreach($moviearray as $movie)
+        {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
+
+    }
     public function getMoviesByCategory($category)
     {
   

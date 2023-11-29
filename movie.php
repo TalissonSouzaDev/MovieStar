@@ -40,6 +40,10 @@ if(!empty($userdata))
         $userOwnsMovie = true; 
     }
 }
+else
+{
+    $userdata = $userdao->findById($movie->user_id);
+}
 
 $alreadyReviewed = true;
 
@@ -54,9 +58,13 @@ $alreadyReviewed = true;
             <p class="movie-details">
                 <span>Duração: <?= $movie->length ?></span>
                 <span class="pipe"></span>
-                <span> <?= $movie->category ?></span>
+                <br>
+                <span>Categoria: <?= $movie->category ?></span>
                 <span class="pipe"></span>
-                <span><i class="fas fa-star"></i> 9</span>
+                <br>
+                <span>Nota<i class="fas fa-star"></i>: 9</span>
+                <br>
+                <span>Author: <a href="profile.php?id=<?= $movie->user_id ?>" class="text-white"><?php echo "{$userdata->name} {$userdata->lastname}"; ?></a></span>
             </p>
 
 
