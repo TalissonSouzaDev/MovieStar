@@ -2,13 +2,21 @@
 require_once("./templates/header.php");
 require_once("models/Movie.php");
 require_once("dao/MovieDAO.php");
+require_once("dao/ReviewDAO.php");
 
 // PEGA O ID DO FILME
 
 $id = filter_input(INPUT_GET,"id");
 $movie;
+$author;
 
 $moviedao = new MovieDao($conn);
+
+// review
+$reviewdao = new ReviewDao($conn);
+
+$rating = $reviewdao->getRatings($id);
+
 
 if(empty($id))
 {
@@ -26,6 +34,9 @@ else
 
 }
 
+// pegando ou author
+$author = $userdao->findById($movie->user_id);
+
 if(empty($movie->image))
 {
     $movie->image = "movie_cover.jpeg";
@@ -33,17 +44,16 @@ if(empty($movie->image))
 
 $userOwnsMovie = false;
 
+
 if(!empty($userdata))
 {
     if($userdata->id === $movie->user_id)
     {
         $userOwnsMovie = true; 
+     
     }
 }
-else
-{
-    $userdata = $userdao->findById($movie->user_id);
-}
+
 
 $alreadyReviewed = true;
 
@@ -62,9 +72,9 @@ $alreadyReviewed = true;
                 <span>Categoria: <?= $movie->category ?></span>
                 <span class="pipe"></span>
                 <br>
-                <span>Nota<i class="fas fa-star"></i>: 9</span>
+                <span>Nota<i class="fas fa-star"></i>: <?= number_format($rating['rating'],1,".",",");?></span>
                 <br>
-                <span>Author: <a href="profile.php?id=<?= $movie->user_id ?>" class="text-white"><?php echo "{$userdata->name} {$userdata->lastname}"; ?></a></span>
+                <span>Author: <a href="profile.php?id=<?= $movie->user_id ?>" class="text-white"><?php echo "{$author->name} {$author->lastname}"; ?></a></span>
             </p>
 
 
@@ -89,6 +99,7 @@ $alreadyReviewed = true;
                 <form action="review_process.php" method="post">
                     <input type="hidden" name="type" value="create">
                     <input type="hidden" name="movie_id" value="<?=$movie->id ?>">
+                    <input type="hidden" name="user_id" value="<?= $userdata->id ?>">
                     <div class="form-group">
                         <label for="rating">Nota do filme:</label>
                         <select name="rating" id="rating" class="form-select">

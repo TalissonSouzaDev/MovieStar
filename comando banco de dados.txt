@@ -1,7 +1,7 @@
 create database Moviestar;
 
 create table users(
-id int(11) UNSIGNED auto incrimente primary key,
+id int(11) UNSIGNED AUTO_INCREMENT primary key,
 name varchar(100) not null,
 lastname varchar(100),
 password varchar(200) not null,
@@ -26,10 +26,10 @@ foreign key user_id references users(id);
 );
 
 
-CREATE TABLE REVIEW 
+CREATE TABLE reviews 
 
 (
-ID int(11) UNSIGNED AUTO INCREMENT PRIMARY KEY,
+ID int(11) UNSIGNED AUTO INCREMENT_PRIMARY KEY,
 rating int,
 review TEXT,
 user_id int(11) UNSIGNED,

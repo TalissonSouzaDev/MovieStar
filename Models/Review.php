@@ -15,7 +15,7 @@ interface interfaceReview
 {
     public function buildReview($data);
     public function getMoviewsReview($id);
-    public function create(Review $review);
+    public function create($review);
     public function update(Review $review);
     public function destroy($id);
     public function hasAlreadyReviewed($id, $userId);

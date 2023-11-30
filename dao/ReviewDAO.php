@@ -43,10 +43,11 @@ class ReviewDao implements interfaceReview
             }
         }
     }
-    public function create(Review $review)
+    public function create($review)
     {
        try 
        {
+        
         $sql = "INSERT INTO reviews (review,rating,user_id,movie_id) VALUES (:review,:rating,:user_id,:movie_id)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":review",$review->review);
@@ -70,5 +71,22 @@ class ReviewDao implements interfaceReview
     public function destroy($id){}
 
     public function hasAlreadyReviewed($id, $userId){}
-    public function getRatings($id){}
+    public function getRatings($id)
+    {
+
+        
+        $stmt = $this->conn->prepare("SELECT AVG(rating) as rating FROM reviews WHERE movie_id = :id");
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+       
+        if($stmt->rowCount() > 0 )
+        {
+            $MediaRating = $stmt->fetch();
+            return $MediaRating;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
