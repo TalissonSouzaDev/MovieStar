@@ -136,7 +136,26 @@ class MovieDao implements IMovie
         return $movie;
       }
     }
-    public function findByTitle($title){}
+    public function findByTitle($title)
+    {
+      $movies = [];
+      $titleName = "%{$title}%";
+      $stmt = $this->conn->prepare("SELECT * FROM movies WHERE title LIKE :title");
+      $stmt->bindParam(":title",$titleName);
+      $stmt->execute();
+
+      if($stmt->rowCount() > 0)
+      {
+        $moviearray = $stmt->fetchAll();
+
+        foreach($moviearray as $movie){
+          $movies[] = $this->buildMovie($movie);
+        }
+       
+      }
+
+      return $movies;
+    }
     public function Create(Movie $movie)
     {
       $sql = "INSERT INTO movies (title,description,image,trailer,category,length,user_id) VALUES (:title,:description,:image,:trailer,:category,:length,:user_id)";

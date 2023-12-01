@@ -3,23 +3,21 @@
     <div id="social-container">
         <ul>
             <li>
-                <a href=""><i class="fab fa-facebook-square"></i></a>
+                <a href="https://github.com/TalissonSouzaDev" target="_blank"><i class="fa-brands fa-github"></i></a>
             </li>
             <li>
-                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/in/talisson-souza-81a069215/"  target="_blank"><i class="fa-brands fa-linkedin"></i></a>
             </li>
             <li>
-                <a href=""><i class="fab fa-youtube"></i></a>
+                <a href="https://talissonsouzadev.github.io/Portifolio/"  target="_blank"><i class="fa-solid fa-link"></i></a>
             </li>
         </ul>
     </div>
 
     <div id="footer-links-container">
         <ul>
-            <li><a href="">Adicionar Filme</a></li>
-            <li><a href="">Adicionar Criticas</a></li>
             <?php if(empty($userdata)): ?>
-                <li><a href="">Entrar / Registrar</a></li>
+                <li><a href="./auth.php">Entrar / Registrar</a></li>
             <?php endif;?>
         </ul>
     </div>

@@ -49,16 +49,11 @@ $userdata = $userdao->verifyToken(false);
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid " id="nav-container">
     <a class="navbar-brand" href="index.php"><i class="fas fa-star"></i> PipeStar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="nav-elements" id="mynavbar">
-  
-
-                <form class="d-flex" method="post">
+                <form action="index.php?" class="d-flex" method="get">
                         <input class="form-control" name="search" type="text" placeholder="Search">
-                        <button class="btn btn-light" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
+                        <button class="btn btn-light" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
 
 
                     <ul class="navbar-nav d-flex">

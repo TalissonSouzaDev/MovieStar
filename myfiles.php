@@ -2,8 +2,10 @@
 <?php
  require_once("./templates/header.php");
  require_once("./dao/MovieDAO.php");
+ require_once("./dao/ReviewDAO.php");
 
  $moviedao =  new MovieDao($conn);
+ $reviewdao =  new ReviewDao($conn);
  $movies = $moviedao->myfiles();
  
  if($userdata != [])
@@ -32,7 +34,8 @@
   <div class="card-rating">
     Nota:
   <i class="fas fa-star" style="color: #f5dd42;"></i>
-  <span class="rating">9</span>
+  <?php  $rating = $reviewdao->getRatings($movie->id); ?>
+  <span class="rating"><?= $rating['rating'] > 0 ? number_format($rating['rating'],1,".") : "Sem Avaliação"  ?></span>
   </div>
     <div class="latestmovie">
     <a href="movie.php?id=<?= $movie->id ?>" class="card-title"><?= $movie->title ?></a>

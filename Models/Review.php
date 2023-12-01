@@ -20,6 +20,7 @@ interface interfaceReview
     public function destroy($id);
     public function hasAlreadyReviewed($id, $userId);
     public function getRatings($id);
+    public function getByIdEdit($id);
 
 }
 

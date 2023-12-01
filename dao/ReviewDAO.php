@@ -30,6 +30,7 @@ class ReviewDao implements interfaceReview
     }
     public function getMoviewsReview($movieid)
     {
+        $reviews = [];
         if(!empty($movieid))
         {
             $stmt = $this->conn->prepare("SELECT * FROM reviews WHERE movie_id=:movie_id");
@@ -37,11 +38,15 @@ class ReviewDao implements interfaceReview
             $stmt->execute();
             if($stmt->rowCount() > 0)
             {
-                $reviewdata = $stmt->fetchAll();
-                $review = $this->buildReview($reviewdata);
-                return $review;
+                $reviewsarray = $stmt->fetchAll();
+                foreach($reviewsarray as $review)
+                {
+                  $reviews[] = $this->buildReview($review);
+                }
             }
         }
+
+        return $reviews;
     }
     public function create($review)
     {
@@ -61,24 +66,63 @@ class ReviewDao implements interfaceReview
        {
         return false;
        }
+    }
 
-        
-       
-
+    public function getByIdEdit($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM reviews WHERE id = :id");
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();       
+        if($stmt->rowCount() > 0 )
+        {
+            $review = $stmt->fetch();
+            return $this->buildReview($review);
+        }
+        else
+        {
+            return false;
+        }
 
     }
-    public function update(Review $review){}
-    public function destroy($id){}
+
+    public function update(Review $review)
+    {
+        try 
+       {
+        $sql = "UPDATE reviews SET review = :review,rating = :rating WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id",$review->id);
+        $stmt->bindParam(":rating",$review->rating);
+        $stmt->bindParam(":review",$review->review);
+        $stmt->execute();
+        return true;
+       }
+       catch(Exception $e)
+       {
+        return false;
+       }
+    }
+    public function destroy($id)
+    {
+       try {
+        $stmt= $this->conn->prepare("DELETE FROM reviews WHERE id =:id");
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        return true;
+       }
+       catch(Exception $e)
+       {
+        return false;
+       }
+    }
 
     public function hasAlreadyReviewed($id, $userId){}
     public function getRatings($id)
     {
 
-        
         $stmt = $this->conn->prepare("SELECT AVG(rating) as rating FROM reviews WHERE movie_id = :id");
         $stmt->bindParam(":id",$id);
-        $stmt->execute();
-       
+        $stmt->execute();       
         if($stmt->rowCount() > 0 )
         {
             $MediaRating = $stmt->fetch();
@@ -86,7 +130,7 @@ class ReviewDao implements interfaceReview
         }
         else
         {
-            return false;
+            return 0;
         }
     }
 }

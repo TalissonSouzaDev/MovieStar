@@ -22,7 +22,6 @@ $type = filter_input(INPUT_POST, "type");
 
 if($type == "create")
 {
-    $type = filter_input(INPUT_POST, "type");
     $movie_id = filter_input(INPUT_POST, "movie_id");
     $user_id = filter_input(INPUT_POST, "user_id");
     $rating = filter_input(INPUT_POST, "rating");
@@ -49,4 +48,48 @@ if($type == "create")
     }
 
    
+}
+
+elseif($type == "update")
+{
+    $review_id = filter_input(INPUT_POST, "review_id");
+    $movie_id = filter_input(INPUT_POST, "movie_id");
+    $rating = filter_input(INPUT_POST, "rating");
+    $review = filter_input(INPUT_POST, "review");
+
+    if(empty($review))
+    {
+        $Message->SetMessage("No comentario você precisa pelo menos ter acima de 1 caracter ","alert-info","movie.php?id=${movie_id}");
+    }
+
+    // operação de update
+     $reviewdata = new Review();
+     $reviewdata->id = $review_id;
+     $reviewdata->rating = $rating;
+     $reviewdata->review = $review;
+     $reviewProcess = $ReviewDao->update($reviewdata);
+    if($reviewProcess)
+    {
+        $Message->SetMessage("Comentario Atualizado com sucesso 👏","alert-success","movie.php?id=${movie_id}");
+    }
+    else {
+        $Message->SetMessage("algum deu errado 😞","alert-danger","movie.php?id=${movie_id}");
+    }
+
+}
+
+elseif($type == "delete")
+{
+
+    $review_id = filter_input(INPUT_POST, "review_id");
+    $movie_id = filter_input(INPUT_POST, "movie_id");
+    $reviewProcess = $ReviewDao->destroy($review_id);
+    if($reviewProcess)
+    {
+        $Message->SetMessage("seu comentario foi deletado com sucesso 👏","alert-success","movie.php?id=${movie_id}");
+    }
+    else {
+        $Message->SetMessage("algum deu errado 😞","alert-danger","movie.php?id=${movie_id}");
+    }
+
 }

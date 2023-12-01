@@ -10,12 +10,16 @@ body {
 
 
 #nav-container{
+    background-color: #272525;
+    opacity: 0.8;
     height: 100px;
     box-shadow: 5px 3px 10px gray;
     padding: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
+ 
     
 
     
@@ -25,6 +29,7 @@ body {
     width: 70%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     
 }
 
@@ -52,17 +57,14 @@ body {
 }
 
 
-#main-container {
+#main-container { 
    padding: 25px;
     background-color: #000;
     color: #fff;
-    width: 100%;
-
-    
 }
 
+
 #footer {
-    margin: 0px;
     background-color: #000;
     text-align: center;
     color: #FFF;
@@ -117,6 +119,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
     padding-top: 10%;
  
 }
@@ -195,7 +198,7 @@ align-items: center;
 
 .index_list ul {
     list-style: none;
-   padding: 100px;
+    padding: 100px;
 }
 .index_list ul li h1 {
    
@@ -209,8 +212,13 @@ align-items: center;
 {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+.movie_card > div
+{
+    margin: 5px;
 }
 .latestmovie{
     display: flex;
@@ -225,6 +233,7 @@ align-items: center;
 .moviereview 
 {
     padding-top: 50px;
+    
 }
 #reviews-container
 {
@@ -258,4 +267,74 @@ align-items: center;
 .profiledata img {
     border-radius: 50%;
     margin-bottom: 25px;
+}
+
+
+.star {
+    color:#f5dd42;
+}
+
+.movietrailer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-elements
+{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.btn-comment{
+    display: flex;
+    align-items: center;
+}
+
+.btn-comment a {
+    margin: 5px;
+}
+
+@media screen and (max-width:800px) {
+
+    #nav-container {
+        height: 300px;
+    }
+
+    .nav-elements form input {
+        width: 300px;
+    }
+
+    .newmovie {
+        font-size: 18px;
+        padding: 5px;
+    }
+    .newmovie form , .newmovie form div img {
+        width: 100%;
+    }
+ 
+    .editprofile div input,textarea {
+        width: 300px;
+     
+    }
+
+    .index_list ul {
+        padding: 0px;
+    }
+    .index_list ul li h1 {
+       
+        width:100%;
+     
+    }
+
+    .movietrailer {
+        flex-direction: column;
+    }
+
+
+    .movie-container,.movie-container iframe , .movietrailer div img {
+        width: 100%;
+    }
+    
+   
 }
